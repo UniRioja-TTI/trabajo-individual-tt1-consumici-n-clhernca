@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Grid</title>
+    <style>
+        .grid-container {
+            display: inline-grid;
+            gap: 2px;
+            margin: 10px;
+        }
+        .celda {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultado</h1>
+    <div th:each="entrada : ${celdasPorTiempo}">
+        <h3 th:text="'Tiempo: ' + ${entrada.key}"></h3>
+        <div class="grid-container"
+             th:style="'grid-template-columns: repeat(' + ${ancho} + ', 30px)'">
+            <div th:each="celda : ${entrada.value}"
+                 class="celda"
+                 th:style="'background-color:' + ${celda.color} + ';
+                            grid-column:' + ${celda.x + 1} + ';
+                            grid-row:' + ${celda.y + 1}">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
